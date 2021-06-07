@@ -2,29 +2,31 @@
 
 namespace App\Controller;
 
+use App\Entity\Spot;
 use App\Repository\SpotRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
      * @Route("/home", name="home")
-     * @Route("/home/{search}", name="home", defaults={"search":""})
+     * @Route("/", name="default")
+     * @Route("/search/{searchterm}", name="search", defaults={"searchterm":""})
      */
-    public function index($search = null, EntityManagerInterface $manager, SpotRepository $spotRepository): Response
+    public function index(SpotRepository $spotRepository, $searchterm = ""): Response
     {
-        if (!empty($search)) {
-            $items = $spotRepository->search($search);
+        $spots = [];
+        if (!empty($searchterm)) {
+            $spots = $spotRepository->customSearch($searchterm);
         } else {
-            $items = $spotRepository->findAll();
+            $spots = $spotRepository->findAll();
         }
 
         return $this->render('home/index.html.twig', [
-            'items' => $items,
+            'spots' => $spots
         ]);
     }
 }

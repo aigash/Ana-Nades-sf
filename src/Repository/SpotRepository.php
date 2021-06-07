@@ -19,14 +19,14 @@ class SpotRepository extends ServiceEntityRepository
         parent::__construct($registry, Spot::class);
     }
 
-    public function search($value)
+    public function customSearch($searchTerm)
     {
-        $valueWithPercent = "%$value%";
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.content like :val')
-            ->setParameter('val', $valueWithPercent)
-            ->getQuery()
-            ->getResult();
+        return $this->createQueryBuilder('s')
+            ->Where('s.content like :term')
+            ->orWhere('s.title like :term')
+            ->addOrderBy('s.id', 'desc')
+            ->setParameter('term', '%' . $searchTerm . '%')
+            ->getQuery()->getResult();
     }
 
     // /**

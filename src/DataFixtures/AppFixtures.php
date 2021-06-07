@@ -35,9 +35,7 @@ class AppFixtures extends Fixture
             $user->setAvatar($faker->imageUrl());
             $user->setRoles(["USER_ROLE"]);
             $manager->persist($user);
-        }
 
-        for ($j = 0; $j < 10; $j++) {
             $oneSpot = new Spot();
             $oneSpot->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
             $oneSpot->setTitle($faker->word());
@@ -45,6 +43,7 @@ class AppFixtures extends Fixture
             $oneSpot->setUrlPos($faker->imageUrl(640, 480, "cats", true, null, true));
             $oneSpot->setUrlAim($faker->imageUrl(640, 480, "cats", true, null, true));
             $oneSpot->setUrlLand($faker->imageUrl(640, 480, "cats", true, null, true));
+            $oneSpot->setAuthor($user);
             $manager->persist($oneSpot);
         }
 

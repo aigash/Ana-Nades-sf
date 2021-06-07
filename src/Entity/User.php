@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -40,6 +42,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $avatar;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Spot::class, mappedBy="author")
+     */
+    private $spots;
+
+    public function __construct()
+    {
+        $this->spots = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -130,6 +142,36 @@ class User implements UserInterface
     public function setAvatar(string $avatar): self
     {
         $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Spot[]
+     */
+    public function getSpots(): Collection
+    {
+        return $this->spots;
+    }
+
+    public function addSpot(Spot $spot): self
+    {
+        if (!$this->spots->contains($spot)) {
+            $this->spots[] = $spot;
+            $spot->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpot(Spot $spot): self
+    {
+        if ($this->spots->removeElement($spot)) {
+            // set the owning side to null (unless already changed)
+            if ($spot->getAuthor() === $this) {
+                $spot->setAuthor(null);
+            }
+        }
 
         return $this;
     }
