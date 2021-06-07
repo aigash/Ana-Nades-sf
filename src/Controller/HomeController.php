@@ -12,6 +12,7 @@ class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="index")
+     * @Route("/home", name="home")
      * @Route("/home/{search}", name="home", defaults={"search":""})
      */
     public function index($search = null, EntityManagerInterface $manager, SpotRepository $spotRepository): Response
