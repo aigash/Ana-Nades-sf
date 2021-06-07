@@ -19,6 +19,16 @@ class SpotRepository extends ServiceEntityRepository
         parent::__construct($registry, Spot::class);
     }
 
+    public function search($value)
+    {
+        $valueWithPercent = "%$value%";
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.content like :val')
+            ->setParameter('val', $valueWithPercent)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Spot[] Returns an array of Spot objects
     //  */

@@ -13,16 +13,15 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        $nbPostsToCreate = random_int(0, 10);
-
-        for ($j = 0; $j < $nbPostsToCreate; $j++) {
-            $onePost = new Spot();
-            $onePost->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
-            $onePost->setTitle($faker->word());
-            $onePost->setContent($faker->word());
-            $onePost->setUrlPos($faker->imageUrl(640, 480, "cats", true, null, true));
-            $onePost->setUrlAim($faker->imageUrl(640, 480, "cats", true, null, true));
-            $onePost->setUrlLand($faker->imageUrl(640, 480, "cats", true, null, true));
+        for ($j = 0; $j < 10; $j++) {
+            $oneSpot = new Spot();
+            $oneSpot->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
+            $oneSpot->setTitle($faker->word());
+            $oneSpot->setContent($faker->word());
+            $oneSpot->setUrlPos($faker->imageUrl(640, 480, "cats", true, null, true));
+            $oneSpot->setUrlAim($faker->imageUrl(640, 480, "cats", true, null, true));
+            $oneSpot->setUrlLand($faker->imageUrl(640, 480, "cats", true, null, true));
+            $manager->persist($oneSpot);
         }
 
         $manager->flush();
