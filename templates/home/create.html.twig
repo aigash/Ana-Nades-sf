@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}new Content{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="col">
+        <form action="{{ path('new') }}" method="post">
+            <input name="title" class="form-control" placeholder="Ajouter un titre" type="text" required="">
+            <input name="content" class="form-control" placeholder="Ajouter une description" type="text" required="">
+            <input name="urlPos" class="form-control" placeholder="Ajouter le lien de l'image du placement" type="text" required="">
+            <input name="urlAim" class="form-control" placeholder="Ajouter le lien de l'image de l'endroit à viser" type="text" required="">
+            <input name="urlLand" class="form-control" placeholder="Ajouter le lien de l'image de la cible" type="text" required="">
+            <p class="infosup">Les images doivent d'abord être hébergées en ligne sur un hébergeur comme Gyazo par exemple. Il faut ensuite saisir le direct link dans les zones de texte en dessous.</p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

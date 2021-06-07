@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $manager->persist($user);
 
             $oneSpot = new Spot();
-            $oneSpot->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
+            //$oneSpot->setCreatedAt($faker->dateTime($max = 'now', $timezone = null));
             $oneSpot->setTitle($faker->word());
             $oneSpot->setContent($faker->word());
             $oneSpot->setUrlPos($faker->imageUrl(640, 480, "cats", true, null, true));

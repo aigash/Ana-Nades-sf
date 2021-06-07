@@ -47,8 +47,8 @@ class RegistrationFormType extends AbstractType
                         'max' => 20,
                     ]),
                 ],
-            ]);
-        //->add('photoProfileUrl', UrlType::class);
+            ])
+            ->add('avatar', UrlType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

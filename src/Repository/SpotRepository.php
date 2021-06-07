@@ -21,10 +21,10 @@ class SpotRepository extends ServiceEntityRepository
 
     public function customSearch($searchTerm)
     {
-        return $this->createQueryBuilder('s')
-            ->Where('s.content like :term')
-            ->orWhere('s.title like :term')
-            ->addOrderBy('s.id', 'desc')
+        return $this->createQueryBuilder('p')
+            ->Where('p.content like :term')
+            ->orWhere('p.title like :term')
+            ->addOrderBy('p.id', 'desc')
             ->setParameter('term', '%' . $searchTerm . '%')
             ->getQuery()->getResult();
     }
