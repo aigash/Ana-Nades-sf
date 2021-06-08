@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
 <div class="container">
     <div class="col">
@@ -14,28 +12,6 @@
         <a href="/new" class="btn btn-block d-flex justify-content-center align-items-center" id="btnaddspot" type="button">
             <i class='bx bx-plus mr-3'></i>Ajouter un spot de grenade.
         </a>
-            <!--<div class="newMsg">
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <a class="btn btn-block text-left d-flex align-items-center" id="btnaddspot" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            <i class='bx bx-plus mr-3'></i>Ajouter un spot de grenade.
-                        </a>
-                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                            <div class="card-body">
-                                <form action="" method="POST">
-                                    <input name="title" class="form-control" placeholder="Ajouter un titre" type="text" required="">
-                                    <input name="content" class="form-control" placeholder="Ajouter une description" type="text" required="">
-                                    <input name="urlPos" class="form-control" placeholder="Ajouter le lien de l'image du placement" type="text" required="">
-                                    <input name="urlAim" class="form-control" placeholder="Ajouter le lien de l'image de l'endroit à viser" type="text" required="">
-                                    <input name="urlLand" class="form-control" placeholder="Ajouter le lien de l'image de la cible" type="text" required="">
-                                    <p class="infosup">Les images doivent d'abord être hébergées en ligne sur un hébergeur comme Gyazo par exemple. Il faut ensuite saisir le direct link dans les zones de texte en dessous.</p>
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
 </div>
 {% endif %}
 
@@ -44,7 +20,7 @@
     <div class="col mb-5">
         <div class="card horizontal px-4 py-4">
             <div class="mb-4 d-flex align-items-center">
-                <img src="img/{{ oneSpot.author.avatar }}" alt="" width="55px" height="55px" class="rounded-circle mr-3">
+                <img src="{{ oneSpot.author.avatar }}" alt="" width="55px" height="55px" class="rounded-circle mr-3">
                 <div class="meta">
                     <h5 class="name mt-0">{{ oneSpot.author.nickname }}</h5>
                     <h6 class="date">{{ oneSpot.createdAt|date('d-m-Y') }}</h6>

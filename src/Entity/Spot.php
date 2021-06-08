@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=SpotRepository::class)
  */
+
 class Spot
 {
     /**
@@ -49,6 +50,7 @@ class Spot
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="spots")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
 

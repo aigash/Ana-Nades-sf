@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% form_theme spotForm 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+<div class="container">
+    <div class="col">
+
+        {{ form_start(spotForm) }}
+            {{ form_row(spotForm.title, {
+                label: 'Ajouter un titre'
+            }) }}
+            {{ form_row(spotForm.content, {
+                label: 'Ajouter une description'
+            }) }}
+            {{ form_row(spotForm.urlPos, {
+                label: "Ajouter le lien de l'image du placement"
+            }) }}
+            {{ form_row(spotForm.urlAim, {
+                label: "Ajouter le lien de l'image de l'endroit à viser"
+            }) }}
+            {{ form_row(spotForm.urlLand, {
+                label: "Ajouter le lien de l'image de la cible"
+            }) }}
+            <p class="infosup">Les images doivent d'abord être hébergées en ligne sur un hébergeur comme Gyazo par exemple. Il faut ensuite saisir le direct link dans les zones de texte en dessous.</p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {{ form_end(spotForm) }}
+    </div>
+</div>
+{% endblock %}

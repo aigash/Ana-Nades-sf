@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Spot;
+use App\Form\SpotFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,22 +16,15 @@ class ContentController extends AbstractController
      */
     public function create(Request $request): Response
     {
+        $newSpot = new Spot();
+        $form = $this->createForm(SpotFormType::class, $newSpot);
+        $form->handleRequest($request);
         $user = $this->getUser();
-        if ($user != null && $request->request->has("title") && $request->request->has("content") && $request->request->has("urlPos") && $request->request->has("urlAim") && $request->request->has("urlLand")) {
-            $title = $request->request->get("title");
-            $content = $request->request->get("content");
-            $urlPos = $request->request->get("urlPos");
-            $urlAim = $request->request->get("urlAim");
-            $urlLand = $request->request->get("urlLand");
 
-            $newSpot = new Spot();
-            $newSpot->setAuthor($user);
-            $newSpot->setTitle($title);
-            $newSpot->setContent($content);
-            $newSpot->setUrlPos($urlPos);
-            $newSpot->setUrlAim($urlAim);
-            $newSpot->setUrlLand($urlLand);
+        if ($form->isSubmitted() && $form->isValid()) {
+
             $newSpot->setCreatedAt(new \DateTime());
+            $newSpot->setAuthor($user);
 
             $manager = $this->getDoctrine()->getManager();
             $manager->persist($newSpot);
@@ -38,6 +32,8 @@ class ContentController extends AbstractController
 
             return $this->redirectToRoute('home');
         }
-        return $this->render('home/create.html.twig',  []);
+        return $this->render('new/create.html.twig',  [
+            'spotForm' => $form->createView(),
+        ]);
     }
 }

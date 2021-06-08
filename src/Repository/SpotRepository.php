@@ -19,7 +19,7 @@ class SpotRepository extends ServiceEntityRepository
         parent::__construct($registry, Spot::class);
     }
 
-    public function customSearch($searchTerm)
+    /*public function customSearch($searchTerm)
     {
         return $this->createQueryBuilder('p')
             ->Where('p.content like :term')
@@ -27,7 +27,7 @@ class SpotRepository extends ServiceEntityRepository
             ->addOrderBy('p.id', 'desc')
             ->setParameter('term', '%' . $searchTerm . '%')
             ->getQuery()->getResult();
-    }
+    }*/
 
     // /**
     //  * @return Spot[] Returns an array of Spot objects
